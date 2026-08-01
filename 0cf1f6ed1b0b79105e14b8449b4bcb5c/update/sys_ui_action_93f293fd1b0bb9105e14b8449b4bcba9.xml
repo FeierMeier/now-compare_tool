@@ -10,6 +10,7 @@
         <condition/>
         <form_action>true</form_action>
         <form_button>true</form_button>
+        <form_button_icon/>
         <form_button_v2>false</form_button_v2>
         <form_context_menu>false</form_context_menu>
         <form_link>false</form_link>
@@ -21,14 +22,13 @@
         <list_action>false</list_action>
         <list_banner_button>false</list_banner_button>
         <list_button>false</list_button>
+        <list_button_icon/>
         <list_choice>false</list_choice>
         <list_context_menu>false</list_context_menu>
         <list_link>false</list_link>
         <list_save_with_form_button>false</list_save_with_form_button>
         <list_style/>
-        <messages>CompareTool_progress&#13;
-CompareTool_error_no_return&#13;
-CompareTool_error_modified</messages>
+        <messages>CompareTool_progress,CompareTool_error_no_return,CompareTool_error_modified</messages>
         <name>Compare</name>
         <onclick>checkPrerequisites()</onclick>
         <order>-1000</order>
@@ -98,7 +98,9 @@ function showResults(oReturn) {
 		location.reload();
 	} // if refresh
 } // function showResults]]></script>
+        <show_form_icon_only>false</show_form_icon_only>
         <show_insert>false</show_insert>
+        <show_list_icon_only>false</show_list_icon_only>
         <show_multiple_update>false</show_multiple_update>
         <show_query>false</show_query>
         <show_update>true</show_update>
@@ -108,7 +110,7 @@ function showResults(oReturn) {
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>93f293fd1b0bb9105e14b8449b4bcba9</sys_id>
-        <sys_mod_count>85</sys_mod_count>
+        <sys_mod_count>86</sys_mod_count>
         <sys_name>Compare</sys_name>
         <sys_overrides/>
         <sys_package display_value="Compare Tool" source="x_snc_compare_tool">0cf1f6ed1b0b79105e14b8449b4bcb5c</sys_package>
@@ -116,7 +118,7 @@ function showResults(oReturn) {
         <sys_scope display_value="Compare Tool">0cf1f6ed1b0b79105e14b8449b4bcb5c</sys_scope>
         <sys_update_name>sys_ui_action_93f293fd1b0bb9105e14b8449b4bcba9</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-03-28 07:37:11</sys_updated_on>
+        <sys_updated_on>2026-05-09 14:53:12</sys_updated_on>
         <table>x_snc_compare_tool_config</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>true</ui16_compatible>
