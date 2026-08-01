@@ -5,8 +5,7 @@
         <api_name>x_snc_compare_tool.CompareTool</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
-        <description>Compare Tool&#13;
-Tom Hauri</description>
+        <description/>
         <mobile_callable>false</mobile_callable>
         <name>CompareTool</name>
         <sandbox_callable>false</sandbox_callable>
@@ -1032,50 +1031,40 @@ CompareTool.prototype = {
 		if (this.bTimer) { this._gtDateTime.stopTimer('_parseXML'); }
 	}, // function _parseXML
 
+	_buildMessage: function (sMessage, aRawArgs, oOptions) {
+		if (this.bTimer) { this._gtDateTime.startTimer('_buildMessage'); }
+		var aArguments = []; // collected positional args (everything after sMessage in the caller)
+		for (var i = 1; i < aRawArgs.length; i++) {
+			aArguments.push(String(aRawArgs[i]));
+		} // each argument after sMessage
+		if ((oOptions['bFallbackOnNoArgs']) && (!this._gtArray.isValidArray(aArguments))) {
+			aArguments.push(gs.getMessage('CompareTool_error_noerrordetail'));
+		} // if fallback wanted and no args
+		var sFormatted = gs.getMessage(oOptions['sPrefix'] + sMessage, aArguments);
+		if ((oOptions['bSetInvalid']) && (this.oReturn['bValid'] != false)) {
+			this.oReturn['bValid'] = false;
+			this.oReturn['sMessage'] = sFormatted;
+		} else if (!oOptions['bSetInvalid']) {
+			this.oReturn['sMessage'] = sFormatted;
+		} // if write under valid-guard or unconditionally
+		if (this.bTimer) { this._gtDateTime.stopTimer('_buildMessage'); }
+		return sFormatted;
+	}, // function _buildMessage
+
 	_setMessage: function (sMessage) {
-		if (this.bTimer) { this._gtDateTime.startTimer('_setMessage'); }
-		var aArguments = [];
-		for (var i = 1; i < arguments.length; i++) {
-			aArguments.push(String(arguments[i]));
-		} // each argument after script and scope
-		this.oReturn['sMessage'] = gs.getMessage('CompareTool_info_' + sMessage, aArguments);
-		if (this.bTimer) { this._gtDateTime.stopTimer('_setMessage'); }
+		this._buildMessage(sMessage, arguments, { 'sPrefix': 'CompareTool_info_', 'bSetInvalid': false, 'bFallbackOnNoArgs': false });
 		return false;
-	}, // function _setError
+	}, // function _setMessage
 
 	_setError: function (sMessage) {
-		if (this.bTimer) { this._gtDateTime.startTimer('_setError'); }
-		if (this.oReturn['bValid'] != false) {
-			var aArguments = [];
-			for (var i = 1; i < arguments.length; i++) {
-				aArguments.push(String(arguments[i]));
-			} // each argument after script and scope
-			if (!this._gtArray.isValidArray(aArguments)) {
-				aArguments.push(gs.getMessage('CompareTool_error_noerrordetail'));
-			} // if no arguments
-			this.oReturn['bValid'] = false;
-			this.oReturn['sMessage'] = gs.getMessage('CompareTool_error_' + sMessage, aArguments);
-		} // if already has an error, don't overwrite
-		if (this.bTimer) { this._gtDateTime.stopTimer('_setError'); }
+		this._buildMessage(sMessage, arguments, { 'sPrefix': 'CompareTool_error_', 'bSetInvalid': true, 'bFallbackOnNoArgs': true });
 		return false;
 	}, // function _setError
 
 	_returnError: function (sMessage) {
-		if (this.bTimer) { this._gtDateTime.startTimer('_returnError'); }
-		if (this.oReturn['bValid'] != false) {
-			var aArguments = [];
-			for (var i = 1; i < arguments.length; i++) {
-				aArguments.push(String(arguments[i]));
-			} // each argument after script and scope
-			if (!this._gtArray.isValidArray(aArguments)) {
-				aArguments.push(gs.getMessage('CompareTool_error_noerrordetail'));
-			} // if no arguments
-			this.oReturn['bValid'] = false;
-			this.oReturn['sMessage'] = gs.getMessage('CompareTool_error_' + sMessage, aArguments);
-		} // if already has an error, don't overwrite
+		this._buildMessage(sMessage, arguments, { 'sPrefix': 'CompareTool_error_', 'bSetInvalid': true, 'bFallbackOnNoArgs': true });
 		this._gExecutionTracker.updateResult(this.oReturn);
 		this._gExecutionTracker.fail(gs.getMessage('CompareTool_tracker_error'));
-		if (this.bTimer) { this._gtDateTime.stopTimer('_returnError'); }
 	}, // function _returnError
 
 	_writeTimer: function () {
@@ -1085,7 +1074,7 @@ CompareTool.prototype = {
 	}, // function _writeTimer
 
 	type: 'CompareTool',
-	version: '1.0.5',
+	version: '1.0.6',
 	author: 'Tom Hauri',
 	email: 'tom@hauri.biz'
 };]]></script>
@@ -1093,14 +1082,14 @@ CompareTool.prototype = {
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2023-12-12 13:41:54</sys_created_on>
         <sys_id>c26617b11b4bb9105e14b8449b4bcb17</sys_id>
-        <sys_mod_count>481</sys_mod_count>
+        <sys_mod_count>484</sys_mod_count>
         <sys_name>CompareTool</sys_name>
         <sys_package display_value="Compare Tool" source="x_snc_compare_tool">0cf1f6ed1b0b79105e14b8449b4bcb5c</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Compare Tool">0cf1f6ed1b0b79105e14b8449b4bcb5c</sys_scope>
         <sys_update_name>sys_script_include_c26617b11b4bb9105e14b8449b4bcb17</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2025-01-23 16:05:58</sys_updated_on>
+        <sys_updated_on>2026-08-01 12:48:51</sys_updated_on>
     </sys_script_include>
     <sys_es_latest_script action="INSERT_OR_UPDATE">
         <id>c26617b11b4bb9105e14b8449b4bcb17</id>
